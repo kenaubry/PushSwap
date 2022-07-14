@@ -58,7 +58,7 @@ static void	print_instructions(t_stacks *stacks)
 	{
 		if (e->next != NULL)
 			suiv = e->next;
-		if (e->data == 1 && suiv)
+		if (e->data == 1)
 			ft_printf("sa\n");
 		else if (e->data == 2 && suiv && suiv->data != 1)
 			ft_printf("sb\n");

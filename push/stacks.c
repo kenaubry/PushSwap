@@ -48,6 +48,7 @@ void	free_stack(t_pile **stacks)
 		*stacks = tmp;
 	}
 	free(*stacks);
+	*stacks = NULL;
 }
 
 void	free_all(t_stacks	*stacks)

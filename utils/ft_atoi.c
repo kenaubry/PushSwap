@@ -16,8 +16,11 @@ static void	ft_error(t_stacks *stacks, char *s, int *tab)
 {
 	write(2, "Error\n", 6);
 	free(s);
+	s = NULL;
 	free(tab);
+	tab = NULL;
 	free_all(stacks);
+	stacks = NULL;
 	exit(1);
 }
 
@@ -44,7 +47,6 @@ int	ft_atoi(const char *str, t_stacks *stacks, int *tab)
 		n = 10 * n + (str[i++] - 48);
 		if ((n > 2147483647 && k == 1) || (n > 2147483648 && k == -1))
 			ft_error(stacks, (char *)str, tab);
-
 	}
 	if (i == 0 || i != (int)ft_strlen(str))
 		ft_error(stacks, (char *)str, tab);

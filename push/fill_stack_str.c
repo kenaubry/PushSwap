@@ -61,6 +61,7 @@ static char	*ft_find_number(char *str, int j)
 		k++;
 	}
 	s = ft_strsub(str, p, k);
+	printf("s = %s\n", s);
 	return (s);
 }
 
@@ -92,6 +93,7 @@ static int	*ft_fill_tab(char *str, int n, t_stacks *stacks)
 		j = ft_next_number(str, j);
 		tab[i] = ft_atoi(s, stacks, tab);
 		free(s);
+		s = NULL;
 		i++;
 	}
 	return (tab);
@@ -115,8 +117,8 @@ t_pile	*fill_stack_str(char *argv, t_stacks *stacks)
 	while (i >= 0)
 	{
 		n = tab[i];
-		is_doublon_str(tab, i, ft_count(argv, stacks), stacks);
 		ea = new_stack(n);
+		is_doublon_str(tab, i, ft_count(argv, stacks), stacks, stack_a, ea);
 		ea->next = stack_a;
 		stack_a = ea;
 		i--;

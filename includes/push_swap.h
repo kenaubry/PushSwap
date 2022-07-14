@@ -74,7 +74,8 @@ t_pile				*reverse_rotate_stack(t_pile **bi);
 int					algo(t_stacks *stacks);
 
 // vérifie les doublons d'éléments dans la string donnée
-void				is_doublon_str(int *tab, int i, int n, t_stacks *stacks);
+void				is_doublon_str(int *tab, int i, int n, \
+					t_stacks *stacks, t_pile *stack_a, t_pile *ea);
 
 // remplie la pile avec les differents arguments
 t_pile				*fill_stack(int argc, char **argv, t_stacks *stacks);
@@ -123,12 +124,14 @@ void				ft_sort_min_b(t_stacks *stacks);
 void				instructions(t_pile **init, int n);
 
 // trouve l'index des deux plus petits dans une stack de 5
-t_pile	*index_zero_one(t_stacks *stacks, t_pile *head, int index );
-t_pile	*index_two_three(t_stacks *stacks, t_pile *head, int index );
-t_pile	*index_last(t_stacks *stacks, t_pile *head);
-t_pile	*index_zo_second(t_stacks *stacks, t_pile *head, int index);
-t_pile	*index_last_second(t_stacks *stacks, t_pile *head, int index);
+t_pile				*index_zero_one(t_stacks *stacks, t_pile *head, int index );
+t_pile				*index_two_three(t_stacks *stacks, \
+						t_pile *head, int index );
+t_pile				*index_last(t_stacks *stacks, t_pile *head);
+t_pile				*index_zo_second(t_stacks *stacks, t_pile *head, int index);
+t_pile				*index_last_second(t_stacks *stacks, \
+						t_pile *head, int index);
 
-void	free_exit(t_stacks *stacks);
+void				free_exit(t_stacks *stacks);
 
 #endif
