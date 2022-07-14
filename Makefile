@@ -29,7 +29,8 @@ _SRCS_P = algorithm.c \
 _UTILS = ft_bzero.c \
 		ft_strsub.c \
 		ft_sort_tab.c \
-		ft_atoi.c
+		ft_atoi.c \
+		ft_strdup.c
 
 SRCS_P_DIR = push
 UTILS_DIR = utils

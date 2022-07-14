@@ -12,7 +12,7 @@
 
 #include "../includes/push_swap.h"
 
-static int	ft_count(char *s, t_stacks *stacks)
+static int	ft_count(char *s, t_stacks *stacks, t_ea_sa *ea_sa)
 {
 	int	i;
 	int	k;
@@ -32,6 +32,7 @@ static int	ft_count(char *s, t_stacks *stacks)
 		else if ((s[i] < 48 || s[i] > 57) && s[i] != 32)
 		{
 			write(2, "Error\n", 6);
+			free(ea_sa);
 			free_all(stacks);
 			exit(1);
 		}
@@ -75,7 +76,7 @@ static int	ft_next_number(char *str, int j)
 	return (j);
 }
 
-static int	*ft_fill_tab(char *str, int n, t_stacks *stacks)
+static int	*ft_fill_tab(char *str, int n, t_stacks *stacks, t_ea_sa *ea_sa)
 {
 	int		*tab;
 	int		i;
@@ -84,6 +85,7 @@ static int	*ft_fill_tab(char *str, int n, t_stacks *stacks)
 
 	i = 0;
 	j = 0;
+	printf("ici\n");
 	tab = (int *)malloc(sizeof(int) * (n + 1));
 	if (!tab)
 		exit(1);
@@ -91,7 +93,7 @@ static int	*ft_fill_tab(char *str, int n, t_stacks *stacks)
 	{
 		s = ft_find_number(str, j);
 		j = ft_next_number(str, j);
-		tab[i] = ft_atoi(s, stacks, tab);
+		tab[i] = ft_atoi(s, stacks, tab, ea_sa);
 		free(s);
 		s = NULL;
 		i++;
@@ -101,28 +103,29 @@ static int	*ft_fill_tab(char *str, int n, t_stacks *stacks)
 
 t_pile	*fill_stack_str(char *argv, t_stacks *stacks)
 {
-	t_pile		*ea;
 	t_pile		*stack_a;
-	int			n;
-	int			i;
+	t_ea_sa		*ea_sa;
 	int			*tab;
+	int			in[2];
 
-	ea = NULL;
-	stack_a = NULL;
-	i = ft_count(argv, stacks);
-	if (i == 0)
-		free_exit(stacks);
-	tab = ft_fill_tab(argv, i, stacks);
-	i--;
-	while (i >= 0)
+	ea_sa = init_ea_sa();
+	in[0] = ft_count(argv, stacks, ea_sa);
+	if (in[0] == 0)
+		free_exit(stacks, ea_sa);
+	tab = ft_fill_tab(argv, in[0], stacks, ea_sa);
+	printf("fidsjgioejhido\n");
+	in[0]--;
+	while (in[0] >= 0)
 	{
-		n = tab[i];
-		ea = new_stack(n);
-		is_doublon_str(tab, i, ft_count(argv, stacks), stacks, stack_a, ea);
-		ea->next = stack_a;
-		stack_a = ea;
-		i--;
+		ea_sa->ea = new_stack(tab[in[0]]);
+		in[1] = ft_count(argv, stacks, ea_sa);
+		is_doublon_str(tab, in, stacks, ea_sa);
+		ea_sa->ea->next = ea_sa->stack_a;
+		ea_sa->stack_a = ea_sa->ea;
+		in[0]--;
 	}
 	free(tab);
+	stack_a = ea_sa->stack_a;
+	free(ea_sa);
 	return (stack_a);
 }

@@ -39,12 +39,26 @@ typedef struct s_stacks
 	struct s_pile	*stack_a;
 	struct s_pile	*stack_b;
 	struct s_pile	*inst;
+	struct s_pile	*ea;
 }					t_stacks;
+
+typedef struct s_nb
+{
+	int	n;
+	int	i;
+}				t_nb;
+
+typedef struct s_ea_sa
+{
+	struct s_pile	*ea;
+	struct s_pile	*stack_a;
+}				t_ea_sa;
 
 // utils
 void				ft_bzero(void *s, size_t n);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
-int					ft_atoi(const char *str, t_stacks *stacks, int *tab);
+int					ft_atoi(const char *str, t_stacks *stacks, int *tab, t_ea_sa *ea_sa);
+char				*ft_strdup(const char *src);
 
 // free stack_a, stack_b, inst et la structure contenant le tout
 void				free_all(t_stacks	*stacks);
@@ -54,6 +68,7 @@ t_pile				*new_stack(int n);
 
 // initialise une nouvelle pile
 t_stacks			*init_stacks(void);
+t_ea_sa				*init_ea_sa(void);
 
 // free une pile
 void				free_stack(t_pile **stacks);
@@ -74,8 +89,8 @@ t_pile				*reverse_rotate_stack(t_pile **bi);
 int					algo(t_stacks *stacks);
 
 // vérifie les doublons d'éléments dans la string donnée
-void				is_doublon_str(int *tab, int i, int n, \
-					t_stacks *stacks, t_pile *stack_a, t_pile *ea);
+void				is_doublon_str(int *tab, int *in, \
+					t_stacks *stacks, t_ea_sa *ea_sa);
 
 // remplie la pile avec les differents arguments
 t_pile				*fill_stack(int argc, char **argv, t_stacks *stacks);
@@ -132,6 +147,6 @@ t_pile				*index_zo_second(t_stacks *stacks, t_pile *head, int index);
 t_pile				*index_last_second(t_stacks *stacks, \
 						t_pile *head, int index);
 
-void				free_exit(t_stacks *stacks);
+void				free_exit(t_stacks *stacks, t_ea_sa *ea_sa);
 
 #endif

@@ -51,8 +51,22 @@ int	is_stack_sort(t_pile **stacks, int pile)
 	return (0);
 }
 
-void	free_exit(t_stacks *stacks)
+void	free_exit(t_stacks *stacks, t_ea_sa *ea_sa)
 {
 	free_all(stacks);
+	free(ea_sa);
 	exit(0);
+}
+
+t_ea_sa	*init_ea_sa(void)
+{
+	t_ea_sa	*ea_sa;
+
+	ea_sa = (t_ea_sa *)malloc(sizeof(t_ea_sa));
+	if (!ea_sa)
+		exit(1);
+	ft_bzero(ea_sa, sizeof(ea_sa));
+	ea_sa->ea = NULL;
+	ea_sa->stack_a = NULL;
+	return (ea_sa);
 }
